@@ -156,8 +156,8 @@ def load(kind=None):
         import gcs
         store = gcs.GSStorage(cfg)
     elif kind == 'oss':
-        import oss
-        store = oss.OSSStorage(cfg)
+        import aliyun_oss
+        store = aliyun_oss.OSSStorage(cfg)
     else:
         raise ValueError('Not supported storage \'{0}\''.format(kind))
     _storage[kind] = store
