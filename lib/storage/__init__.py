@@ -155,6 +155,9 @@ def load(kind=None):
     elif kind == 'gcs':
         import gcs
         store = gcs.GSStorage(cfg)
+    elif kind == 'oss':
+        import oss
+        store = oss.OSSStorage(cfg)
     else:
         raise ValueError('Not supported storage \'{0}\''.format(kind))
     _storage[kind] = store
