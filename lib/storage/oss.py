@@ -36,4 +36,5 @@ class OSSStorage(Storage):
 	def remove(self, path):
 		pass
 
-	def get_size(self, )
+	def get_size(self, path):
+		pass
