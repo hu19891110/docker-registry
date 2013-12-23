@@ -19,6 +19,10 @@ common:
     gs_secret_key: REPLACEME
     gs_secure: REPLACEME
 
+    oss_access_key: "X8XGPDz5DFx1YB3r"
+    oss_secret_key: "UzAU4P1s1ptLYuPvLlRSNbpwndfbBB"
+    oss_bucket: "lillian"
+
     # Set a random string here
     secret_key: REPLACEME
 
@@ -47,6 +51,11 @@ prod:
         smtp_password: REPLACEME
         from_addr: docker-registry@localdomain.local
         to_addr: noise+dockerregistry@localdomain.local
+
+# $ export SETTINGS_FLAVOR=oss
+oss:
+    storage: oss
+    storage_path: "_env:STORAGE_PATH:/oss"
 
 # This flavor is automatically used by unit tests
 test:

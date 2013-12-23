@@ -1,0 +1,9 @@
+oss:
+    storage: oss
+    boto_bucket: _env:OSS_BUCKET
+    oss_access_key: _env:OSS_KEY
+    oss_secret_key: _env:OSS_SECRET
+    oss_bucket: _env:OSS_BUCKET
+    oss_encrypt: true
+    oss_secure: true
+    storage_path: /images
