@@ -3,6 +3,8 @@ from oss.oss_api import *
 from oss.oss_xml_handler import *
 from . import Storage
 
+import cache
+
 logger = logging.getLogger(__name__)
 
 class OSSStorage(Storage):
