@@ -21,6 +21,7 @@ cache_prefix = None
 def init():
     global redis_conn, cache_prefix
     cfg = config.load()
+    print(cfg)
     cache = cfg.cache_lru
     print(cache)
     if not cache:
