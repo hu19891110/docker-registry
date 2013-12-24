@@ -166,9 +166,9 @@ class BotoStorage(Storage):
     @cache.get
     def get_content(self, path):
         path = self._init_path(path)
-        logger.debug(path)
+        print(path)
         key = self.makeKey(path)
-        logger.debug(key)
+        print(key)
         if not key.exists():
             raise IOError('No such key: \'{0}\''.format(path))
         return key.get_contents_as_string()
