@@ -29,7 +29,7 @@ class OSSStorage(Storage):
         path = self._init_path(path)
         print("++++++++++")
         print(path)
-
+        return path
 
     def put_content(self, path, content):
         logger.debug("put_content")
