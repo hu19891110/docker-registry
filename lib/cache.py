@@ -30,6 +30,7 @@ def init():
     for k, v in cache.iteritems():
         redis_opts[k] = v
     logging.info('Redis config: {0}'.format(redis_opts))
+    print(redis_opts)
     print(redis_opts['host'])
     print(redis_opts['port'])
     print(redis_opts['db'])
