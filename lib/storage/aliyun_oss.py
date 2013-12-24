@@ -10,14 +10,27 @@ logger = logging.getLogger(__name__)
 class OSSStorage(Storage):
 
 	def __init__(self, config):
-		pass
+		self._config = config
+		self._root_path = self._config.storage_path
+
+	def _init_path(self, path=None):
+		path = os.path.join(self._root_path, path) if path else self._root_path
+		logger.debug(path)
+		if path and path[0] == '/':
+			return path[1:]
+		return path
 
 	def makeKey(self, path):
 		return
 
 	@cache.put
 	def get_content(self, path):
+		logger.debug("in get content", path)
+		path = self._init_path(path)
 		logger.debug("get_content")
+		logger.debug("++++++++++")
+		logger.debug(path)
+
 
 	def put_content(self, path, content):
 		logger.debug("put_content")
