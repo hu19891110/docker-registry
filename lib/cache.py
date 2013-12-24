@@ -28,6 +28,8 @@ def init():
     if not isinstance(cache, dict):
         cache = {}
     for k, v in cache.iteritems():
+        print(k)
+        print(v)
         redis_opts[k] = v
     logging.info('Redis config: {0}'.format(redis_opts))
     print(redis_opts)
