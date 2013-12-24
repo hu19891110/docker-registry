@@ -69,6 +69,7 @@ def update_index_images(namespace, repository, data):
         data = images.values()
         store.put_content(path, json.dumps(data))
     except IOError:
+        logger.debug("IOError")
         store.put_content(path, data)
 
 
