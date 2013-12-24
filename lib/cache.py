@@ -30,6 +30,7 @@ def init():
     for k, v in cache.iteritems():
         redis_opts[k] = v
     logging.info('Redis config: {0}'.format(redis_opts))
+    print(redis_opts['port'])
     redis_conn = redis.StrictRedis(host=redis_opts['host'],
                                    port=int(redis_opts['port']),
                                    db=int(redis_opts['db']),
