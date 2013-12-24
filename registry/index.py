@@ -60,6 +60,7 @@ def update_index_images(namespace, repository, data):
     try:
         images = {}
         data = json.loads(data) + json.loads(store.get_content(path))
+        logger.debug(data)
         for i in data:
             iid = i['id']
             if iid in images and 'checksum' in images[iid]:
