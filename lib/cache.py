@@ -21,24 +21,15 @@ cache_prefix = None
 def init():
     global redis_conn, cache_prefix
     cfg = config.load()
-    print(cfg)
     cache = cfg.cache_lru
-    print(cache)
     if not cache:
         return
     logging.info('Enabling storage cache on Redis')
     if not isinstance(cache, dict):
         cache = {}
     for k, v in cache.iteritems():
-        print(k)
-        print(v)
         redis_opts[k] = v
     logging.info('Redis config: {0}'.format(redis_opts))
-    print(redis_opts)
-    print(redis_opts['host'])
-    print(redis_opts['port'])
-    print(redis_opts['db'])
-    print(redis_opts['password'])
     redis_conn = redis.StrictRedis(host=redis_opts['host'],
                                    port=int(redis_opts['port']),
                                    db=int(redis_opts['db']),
