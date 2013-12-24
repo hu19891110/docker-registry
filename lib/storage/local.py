@@ -6,6 +6,9 @@ import cache
 
 from . import Storage
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class LocalStorage(Storage):
 
@@ -24,6 +27,7 @@ class LocalStorage(Storage):
     @cache.get
     def get_content(self, path):
         path = self._init_path(path)
+        logger.debug(path)
         with open(path, mode='r') as f:
             return f.read()
 
