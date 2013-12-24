@@ -52,6 +52,8 @@ def put_username(username):
 
 def update_index_images(namespace, repository, data):
     path = store.index_images_path(namespace, repository)
+    logger.debug("==========")
+    logger.debug(path)
     try:
         images = {}
         data = json.loads(data) + json.loads(store.get_content(path))

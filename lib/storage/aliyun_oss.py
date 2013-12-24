@@ -17,26 +17,26 @@ class OSSStorage(Storage):
 
 	@cache.put
 	def get_content(self, path):
-		pass
+		logger.debug("get_content")
 
 	def put_content(self, path, content):
-		pass
+		logger.debug("put_content")
 
 	def stream_read(self, path):
-		pass
+		logger.debug("stream_read")
 
 	def stream_write(self, path, fp):
-		pass
+		logger.debug("stream_write")
 
 	def list_directory(self, path=None):
-		pass
+		logger.debug("list_directory")
 
 	def exists(self, path):
-		pass
+		logger.debug("exists")
 
 	@cache.remove
 	def remove(self, path):
-		pass
+		logger.debug("remove")
 
 	def get_size(self, path):
-		pass
+		logger.debug("get_size")
