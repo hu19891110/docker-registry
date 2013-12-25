@@ -56,6 +56,7 @@ def put_username(username):
 def update_index_images(namespace, repository, data):
     path = store.index_images_path(namespace, repository)
     print("==========")
+    print("update_index_images")
     print(path)
     print("==========")
     try:

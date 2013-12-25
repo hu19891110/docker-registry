@@ -33,7 +33,15 @@ class S3Storage(BotoStorage):
     #@cache.put
     def put_content(self, path, content):
         path = self._init_path(path)
+        print("==========")
+        print("put_content")
+        print(path)
+        print("==========")
         key = self.makeKey(path)
+        print("==========")
+        print("put_content")
+        print(key)
+        print("==========")
         key.set_contents_from_string(
             content, encrypt_key=(self._config.s3_encrypt is True))
         return path
