@@ -57,6 +57,7 @@ def update_index_images(namespace, repository, data):
     path = store.index_images_path(namespace, repository)
     print("==========")
     print(path)
+    print("==========")
     try:
         images = {}
         data = json.loads(data) + json.loads(store.get_content(path))
