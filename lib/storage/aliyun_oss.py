@@ -12,6 +12,7 @@ class OSSStorage(Storage):
     def __init__(self, config):
         self._config = config
         self._root_path = self._config.storage_path
+        self._oss = OssAPI(self._config.oss_access_key, self._config.oss_secret_key)
 
     def _init_path(self, path=None):
         path = os.path.join(self._root_path, path) if path else self._root_path
@@ -23,16 +24,21 @@ class OSSStorage(Storage):
     def makeKey(self, path):
         return
 
-    @cache.put
+    def is_exists(path):
+        pass
+
+    def get_contents_as_string(path):
+        pass
+
+    #@cache.put
     def get_content(self, path):
-        print("in get content", path)
         path = self._init_path(path)
-        print("++++++++++")
-        print(path)
-        return path
+        if not self.is_exists(path):
+            raise IOError('No such key: \'{0}\''.format(path))
+        return self.get_contents_as_string(path)
 
     def put_content(self, path, content):
-        logger.debug("put_content")
+        path = self._init_path(path)
 
     def stream_read(self, path):
         logger.debug("stream_read")
@@ -46,7 +52,7 @@ class OSSStorage(Storage):
     def exists(self, path):
         logger.debug("exists")
 
-    @cache.remove
+    #@cache.remove
     def remove(self, path):
         logger.debug("remove")
 

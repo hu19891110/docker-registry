@@ -166,10 +166,6 @@ class BotoStorage(Storage):
     #@cache.get
     def get_content(self, path):
         path = self._init_path(path)
-        print("==========")
-        print("get_content")
-        print(path)
-        print("==========")
         key = self.makeKey(path)
         print("==========")
         print("get_content")
