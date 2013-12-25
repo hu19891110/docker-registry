@@ -30,7 +30,7 @@ class S3Storage(BotoStorage):
     def makeKey(self, path):
         return boto.s3.key.Key(self._boto_bucket, path)
 
-    @cache.put
+    #@cache.put
     def put_content(self, path, content):
         path = self._init_path(path)
         key = self.makeKey(path)
