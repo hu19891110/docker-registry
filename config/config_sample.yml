@@ -19,6 +19,7 @@ common:
     gs_secret_key: REPLACEME
     gs_secure: REPLACEME
 
+    oss_host: oss.aliyuncs.com
     oss_access_key: X8XGPDz5DFx1YB3r
     oss_secret_key: UzAU4P1s1ptLYuPvLlRSNbpwndfbBB
     oss_bucket: lillian
