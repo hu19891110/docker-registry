@@ -98,6 +98,8 @@ def put_tag(namespace, repository, tag):
     if not data or not isinstance(data, basestring):
         return toolkit.api_error('Invalid data')
     if not store.exists(store.image_json_path(data)):
+        print("put_tag")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     store.put_content(store.tag_path(namespace, repository, tag), data)
     sender = flask.current_app._get_current_object()

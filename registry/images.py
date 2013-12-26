@@ -72,6 +72,8 @@ def _get_image_layer(image_id, headers=None):
                             ' but storage is not LocalStorage')
         return flask.Response(store.stream_read(path), headers=headers)
     except IOError:
+        print("_get_image_layer")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
 
 
@@ -84,11 +86,19 @@ def get_private_image_layer(image_id):
         if not repository:
             # No auth token found, either standalone registry or privileged
             # access. In both cases, private images are "disabled"
+            print("get_private_image_layer")
+            print("not repository")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         if not store.is_private(*repository):
+            print("get_private_image_layer")
+            print("store is private")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         return _get_image_layer(image_id)
     except IOError:
+        print("get_private_image_layer")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
 
 
@@ -100,11 +110,16 @@ def get_image_layer(image_id, headers):
     try:
         repository = toolkit.get_repository()
         if repository and store.is_private(*repository):
+            print("get_image_layer")
+            print("is_private")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         # If no auth token found, either standalone registry or privileged
         # access. In both cases, access is always "public".
         return _get_image_layer(image_id, headers)
     except IOError:
+        print("get_image_layer")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
 
 
@@ -114,6 +129,8 @@ def put_image_layer(image_id):
     try:
         json_data = store.get_content(store.image_json_path(image_id))
     except IOError:
+        print("put_image_layer")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     layer_path = store.image_layer_path(image_id)
     mark_path = store.image_mark_path(image_id)
@@ -165,6 +182,8 @@ def put_image_checksum(image_id):
     if not flask.session.get('checksum'):
         return toolkit.api_error('Checksum not found in Cookie')
     if not store.exists(store.image_json_path(image_id)):
+        print("put_image_checksum")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     mark_path = store.image_mark_path(image_id)
     if not store.exists(mark_path):
@@ -188,12 +207,20 @@ def get_private_image_json(image_id):
     if not repository:
         # No auth token found, either standalone registry or privileged access
         # In both cases, private images are "disabled"
+        print("get_private_image_json")
+        print("not repository")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     try:
         if not store.is_private(*repository):
+            print("get_private_image_json")
+            print("is private")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         return _get_image_json(image_id)
     except IOError:
+        print("get_private_image_json")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
 
 
@@ -205,11 +232,16 @@ def get_image_json(image_id, headers):
     try:
         repository = toolkit.get_repository()
         if repository and store.is_private(*repository):
+            print("get_image_json")
+            print("is_private")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         # If no auth token found, either standalone registry or privileged
         # access. In both cases, access is always "public".
         return _get_image_json(image_id, headers)
     except IOError:
+        print("get_image_json")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
 
 
@@ -219,6 +251,8 @@ def _get_image_json(image_id, headers=None):
     try:
         data = store.get_content(store.image_json_path(image_id))
     except IOError:
+        print("_get_image_json")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     try:
         size = store.get_size(store.image_layer_path(image_id))
@@ -239,6 +273,8 @@ def get_image_ancestry(image_id, headers):
     try:
         data = store.get_content(store.image_ancestry_path(image_id))
     except IOError:
+        print("get_image_ancestry")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     return toolkit.response(json.loads(data), headers=headers)
 
@@ -348,13 +384,21 @@ def get_private_image_files(image_id, headers):
     if not repository:
         # No auth token found, either standalone registry or privileged access
         # In both cases, private images are "disabled"
+        print("get_private_image_files")
+        print("repository")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     try:
         if not store.is_private(*repository):
+            print("get_private_image_files")
+            print("is private")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         data = _get_image_files(image_id)
         return toolkit.response(data, headers=headers, raw=True)
     except IOError:
+        print("get_private_image_files")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     except tarfile.TarError:
         return toolkit.api_error('Layer format not supported', 400)
@@ -368,12 +412,17 @@ def get_image_files(image_id, headers):
     try:
         repository = toolkit.get_repository()
         if repository and store.is_private(*repository):
+            print("get_image_files")
+            print("repository")
+            print("Image not found")
             return toolkit.api_error('Image not found', 404)
         # If no auth token found, either standalone registry or privileged
         # access. In both cases, access is always "public".
         data = _get_image_files(image_id)
         return toolkit.response(data, headers=headers, raw=True)
     except IOError:
+        print("get_image_files")
+        print("Image not found")
         return toolkit.api_error('Image not found', 404)
     except tarfile.TarError:
         return toolkit.api_error('Layer format not supported', 400)
