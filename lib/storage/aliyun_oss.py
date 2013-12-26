@@ -26,11 +26,12 @@ class OSSStorage(Storage):
     def makeKey(self, path):
         return
 
-    def is_exists(self, path):
+    def exists(self, path):
         headers = {}
         res = self._oss.head_object(self._config.oss_bucket, path, headers)
         print("==========")
-        print("is_exists")
+        print("exists")
+        print(path)
         print(res.status)
         print("==========")
         if (res.status/100) == 2:
@@ -67,7 +68,7 @@ class OSSStorage(Storage):
         print(path)
         print("==========")
         path = self._init_path(path)
-        if not self.is_exists(path):
+        if not self.exists(path):
             print(path)
             raise IOError('No such key: \'{0}\''.format(path))
         return self.get_contents_as_string(path)
