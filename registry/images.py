@@ -149,7 +149,7 @@ def put_image_layer(image_id):
     sr = toolkit.SocketReader(input_stream)
     tmp, store_hndlr = storage.temp_store_handler()
     sr.add_handler(store_hndlr)
-    h, sum_hndlr = checksums.simple_checksum_handler(json_data)
+    h, sum_hndlr = checksums.simple_checksum_handler(json_data.dumps())
     sr.add_handler(sum_hndlr)
     store.stream_write(layer_path, sr)
     csums.append('sha256:{0}'.format(h.hexdigest()))
