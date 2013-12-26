@@ -57,12 +57,10 @@ class OSSStorage(Storage):
             return res.read()
 
     def set_contents_from_string(self, path, string_data):
-        headers = {}
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
         fp = StringIO.StringIO(string_data)
-        res = self._oss.put_object_from_fp(self._config.oss_bucket, path, 
-                                           fp, 'text', headers)
+        res = self._oss.put_object_from_fp(self._config.oss_bucket, path, fp)
         fp.close()
         if (res.status/100) != 2:
             logger.error(res.read())
