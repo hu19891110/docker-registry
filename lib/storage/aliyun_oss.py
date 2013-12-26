@@ -41,8 +41,10 @@ class OSSStorage(Storage):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
         fp = StringIO.StringIO(string_data)
+        print(self._config.oss_bucket)
+        print(path)
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, 
-                                           fp, '\n', headers)
+                                           fp, 'text/HTML', headers)
         fp.close()
         print(res.reason)
         print(res.read())
