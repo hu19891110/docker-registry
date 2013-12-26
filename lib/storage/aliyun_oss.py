@@ -65,7 +65,7 @@ class OSSStorage(Storage):
             logger.error(res.read())
         return res
 
-    #@cache.put
+    @cache.put
     def get_content(self, path):
         print("==========")
         print("get_content")
@@ -90,7 +90,7 @@ class OSSStorage(Storage):
     def list_directory(self, path=None):
         logger.debug("list_directory")
 
-    #@cache.remove
+    @cache.remove
     def remove(self, path):
         logger.debug("remove")
 
