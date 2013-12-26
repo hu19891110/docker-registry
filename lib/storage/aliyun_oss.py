@@ -44,9 +44,9 @@ class OSSStorage(Storage):
             #fp = StringIO.StringIO()
             print("==========")
             print("get_content_as_string")
-            print(res.body)
+            print(res.read())
             print("==========")
-            return res.body
+            return res.read()
 
     def set_contents_from_string(self, path, string_data):
         headers = {}
