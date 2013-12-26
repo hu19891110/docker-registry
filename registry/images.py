@@ -127,6 +127,8 @@ def get_image_layer(image_id, headers):
 @toolkit.requires_auth
 def put_image_layer(image_id):
     try:
+        print("put_image_layer")
+        print("get_content_layer")
         json_data = store.get_content(store.image_json_path(image_id))
     except IOError:
         print("put_image_layer")
