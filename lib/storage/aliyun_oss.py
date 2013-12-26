@@ -46,6 +46,10 @@ class OSSStorage(Storage):
 
     #@cache.put
     def get_content(self, path):
+        print("==========")
+        print("get_content")
+        print(path)
+        print("==========")
         path = self._init_path(path)
         #if not self.is_exists(path):
         print(path)
