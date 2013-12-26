@@ -12,13 +12,9 @@ class OSSStorage(Storage):
     def __init__(self, config):
         self._config = config
         self._root_path = self._config.storage_path
-        print(self._config.oss_host)
-        print(self._config.oss_access_key)
-        print(self._config.oss_secret_key)
         self._oss = OssAPI(self._config.oss_host, 
                            self._config.oss_access_key, 
                            self._config.oss_secret_key)
-        print(self._oss.get_service().read())
 
     def _init_path(self, path=None):
         path = os.path.join(self._root_path, path) if path else self._root_path
@@ -41,18 +37,11 @@ class OSSStorage(Storage):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
         fp = StringIO.StringIO(string_data)
-        print(self._config.oss_bucket)
-        print(path)
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, 
                                            fp, 'text/HTML', headers)
         fp.close()
-        print(res.reason)
-        print(res.read())
-        if (res.status/100) == 2:
-            print("put object from fp ok")
-        else:
-            print("put object from fp error")
-        print(res)
+        if (res.status/100) != 2:
+            logger.error(res.read())
         return res
 
     #@cache.put
