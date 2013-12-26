@@ -40,6 +40,8 @@ class OSSStorage(Storage):
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, 
                                            fp, '\n', headers)
         fp.close()
+        print(res.reason)
+        print(res.read())
         if (res.status/100) == 2:
             print("put object from fp ok")
         else:
