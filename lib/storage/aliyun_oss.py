@@ -90,9 +90,6 @@ class OSSStorage(Storage):
     def list_directory(self, path=None):
         logger.debug("list_directory")
 
-    def exists(self, path):
-        logger.debug("exists")
-
     #@cache.remove
     def remove(self, path):
         logger.debug("remove")
