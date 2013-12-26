@@ -39,7 +39,14 @@ class OSSStorage(Storage):
             return False
 
     def get_contents_as_string(self, path):
-        pass
+        res = self._oss.get_object(self._config.oss_bucket, path)
+        if (res.status/100) == 2:
+            #fp = StringIO.StringIO()
+            print("==========")
+            print("get_content_as_string")
+            print(res.body)
+            print("==========")
+            return res.body
 
     def set_contents_from_string(self, path, string_data):
         headers = {}
