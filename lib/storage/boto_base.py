@@ -167,10 +167,6 @@ class BotoStorage(Storage):
     def get_content(self, path):
         path = self._init_path(path)
         key = self.makeKey(path)
-        print("==========")
-        print("get_content")
-        print(key)
-        print("==========")
         if not key.exists():
             raise IOError('No such key: \'{0}\''.format(path))
         return key.get_contents_as_string()

@@ -129,6 +129,8 @@ def put_image_layer(image_id):
     try:
         print("put_image_layer")
         print("get_content_layer")
+        c = store.image_json_path(image_id)
+        print(c)
         json_data = store.get_content(store.image_json_path(image_id))
     except IOError:
         print("put_image_layer")
