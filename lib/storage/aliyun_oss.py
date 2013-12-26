@@ -30,15 +30,32 @@ class OSSStorage(Storage):
     def get_contents_as_string(path):
         pass
 
+    def set_contents_from_string(path, string_data):
+        headers = {}
+        if isinstance(string_data, unicode):
+            string_data = string_data.encode("utf-8")
+        fp = StringIO.StringIO(string_data)
+        res = oss.put_object_from_fp(self._config.oss_bucket, path, 
+                                     fp, '\n', headers)
+        fp.close()
+        if (res.status/100) == 2:
+            print("put object from fp ok")
+        else:
+            print("put object from fp error")
+        print(res)
+        return res
+
     #@cache.put
     def get_content(self, path):
         path = self._init_path(path)
-        if not self.is_exists(path):
-            raise IOError('No such key: \'{0}\''.format(path))
+        #if not self.is_exists(path):
+        print(path)
+        raise IOError('No such key: \'{0}\''.format(path))
         return self.get_contents_as_string(path)
 
     def put_content(self, path, content):
         path = self._init_path(path)
+        self.set_contents_from_string(path, content)
 
     def stream_read(self, path):
         logger.debug("stream_read")
