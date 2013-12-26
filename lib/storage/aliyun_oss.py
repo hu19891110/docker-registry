@@ -62,7 +62,7 @@ class OSSStorage(Storage):
             string_data = string_data.encode("utf-8")
         fp = StringIO.StringIO(string_data)
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, 
-                                           fp, 'text/HTML', headers)
+                                           fp, 'text', headers)
         fp.close()
         if (res.status/100) != 2:
             logger.error(res.read())
