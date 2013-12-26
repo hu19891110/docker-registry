@@ -34,26 +34,26 @@ class OSSStorage(Storage):
             res = self._oss.head_object(self._config.oss_bucket, path, headers)
         except Exception as e:
             print(e)
-        print("==========")
-        print("exists")
-        print(path)
-        print(res.status)
-        print("==========")
+        # print("==========")
+        # print("exists")
+        # print(path)
+        # print(res.status)
+        # print("==========")
         if (res.status/100) == 2:
             return True
         else:
-            print(res.read())
+            # print(res.read())
             return False
 
     def get_contents_as_string(self, path):
         res = self._oss.get_object(self._config.oss_bucket, path)
         if (res.status/100) == 2:
             #fp = StringIO.StringIO()
-            print("==========")
-            print("get_content_as_string")
-            print(path)
-            print(res.read())
-            print("==========")
+            # print("==========")
+            # print("get_content_as_string")
+            # print(path)
+            # print(res.read())
+            # print("==========")
             return res.read()
 
     def set_contents_from_string(self, path, string_data):
@@ -68,14 +68,14 @@ class OSSStorage(Storage):
 
     #@cache.get
     def get_content(self, path):
-        print("==========")
-        print("get_content")
-        print(path)
-        print("==========")
+        # print("==========")
+        # print("get_content")
+        # print(path)
+        # print("==========")
         path = self._init_path(path)
         if not self.exists(path, False):
-            print("not exists")
-            print(path)
+            # print("not exists")
+            # print(path)
             raise IOError('No such key: \'{0}\''.format(path))
         return self.get_contents_as_string(path)
 
