@@ -166,8 +166,11 @@ def put_image_layer(image_id):
     except IOError:
         # We don't have a checksum stored yet, that's fine skipping the check.
         # Not removing the mark though, image is not downloadable yet.
+        print('checksum errors')
         flask.session['checksum'] = csums
         return toolkit.response()
+    print('in put_image_layer')
+    print(flask.session.get('checksum')
     # We check if the checksums provided matches one the one we computed
     if checksum not in csums:
         logger.debug('put_image_layer: Wrong checksum')
