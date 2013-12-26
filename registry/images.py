@@ -130,7 +130,7 @@ def put_image_layer(image_id):
         print("put_image_layer")
         print("get_content_layer")
         json_data = json.loads(store.get_content(store.image_json_path(image_id)))
-        print(json_data)
+        json_data = json.dumps(json_data)
     except IOError:
         print("put_image_layer")
         print("Image not found")
