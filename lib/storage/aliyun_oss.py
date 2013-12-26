@@ -50,6 +50,7 @@ class OSSStorage(Storage):
             #fp = StringIO.StringIO()
             print("==========")
             print("get_content_as_string")
+            print(path)
             print(res.read())
             print("==========")
             return res.read()
@@ -73,6 +74,7 @@ class OSSStorage(Storage):
         print(path)
         print("==========")
         if not self.exists(path):
+            print("not exists")
             print(path)
             raise IOError('No such key: \'{0}\''.format(path))
         return self.get_contents_as_string(path)
