@@ -24,13 +24,13 @@ class OSSStorage(Storage):
     def makeKey(self, path):
         return
 
-    def is_exists(path):
+    def is_exists(self, path):
         pass
 
-    def get_contents_as_string(path):
+    def get_contents_as_string(self, path):
         pass
 
-    def set_contents_from_string(path, string_data):
+    def set_contents_from_string(self, path, string_data):
         headers = {}
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
