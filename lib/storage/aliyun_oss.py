@@ -26,8 +26,9 @@ class OSSStorage(Storage):
     def makeKey(self, path):
         return
 
-    def exists(self, path):
-        path = self._init_path(path)
+    def exists(self, path, external=True):
+        if external:
+            path = self._init_path(path)
         headers = {}
         try:
             res = self._oss.head_object(self._config.oss_bucket, path, headers)
@@ -73,7 +74,8 @@ class OSSStorage(Storage):
         print("get_content")
         print(path)
         print("==========")
-        if not self.exists(path):
+        path = self._init_path(path)
+        if not self.exists(path, False):
             print("not exists")
             print(path)
             raise IOError('No such key: \'{0}\''.format(path))
