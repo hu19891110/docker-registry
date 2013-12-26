@@ -35,8 +35,8 @@ class OSSStorage(Storage):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
         fp = StringIO.StringIO(string_data)
-        res = self.oss.put_object_from_fp(self._config.oss_bucket, path, 
-                                          fp, '\n', headers)
+        res = self._oss.put_object_from_fp(self._config.oss_bucket, path, 
+                                           fp, '\n', headers)
         fp.close()
         if (res.status/100) == 2:
             print("put object from fp ok")
