@@ -65,7 +65,7 @@ class OSSStorage(Storage):
             logger.error(res.read())
         return res
 
-    #@cache.put
+    @cache.get
     def get_content(self, path):
         print("==========")
         print("get_content")
@@ -77,6 +77,7 @@ class OSSStorage(Storage):
             raise IOError('No such key: \'{0}\''.format(path))
         return self.get_contents_as_string(path)
 
+    @cache.put
     def put_content(self, path, content):
         path = self._init_path(path)
         self.set_contents_from_string(path, content)
