@@ -12,9 +12,13 @@ class OSSStorage(Storage):
     def __init__(self, config):
         self._config = config
         self._root_path = self._config.storage_path
+        print(self._config.oss_host)
+        print(self._config.oss_access_key)
+        print(self._config.oss_secret_key)
         self._oss = OssAPI(self._config.oss_host, 
                            self._config.oss_access_key, 
                            self._config.oss_secret_key)
+        print(self._oss.get_service().read())
 
     def _init_path(self, path=None):
         path = os.path.join(self._root_path, path) if path else self._root_path
