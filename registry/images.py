@@ -195,6 +195,8 @@ def put_image_checksum(image_id):
     err = store_checksum(image_id, checksum)
     if err:
         return toolkit.api_error(err)
+    print(checksum)
+    print(flask.session.get('checksum'))
     if checksum not in flask.session.get('checksum', []):
         logger.debug('put_image_layer: Wrong checksum')
         return toolkit.api_error('put_image_checksum: Checksum mismatch')
