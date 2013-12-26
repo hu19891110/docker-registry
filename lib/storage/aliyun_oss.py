@@ -28,7 +28,10 @@ class OSSStorage(Storage):
 
     def exists(self, path):
         headers = {}
-        res = self._oss.head_object(self._config.oss_bucket, path, headers)
+        try:
+            res = self._oss.head_object(self._config.oss_bucket, path, headers)
+        except Exception as e:
+            print(e)
         print("==========")
         print("exists")
         print(path)
