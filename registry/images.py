@@ -170,7 +170,7 @@ def put_image_layer(image_id):
         flask.session['checksum'] = csums
         return toolkit.response()
     print('in put_image_layer')
-    print(flask.session.get('checksum')
+    print(flask.session.get('checksum'))
     # We check if the checksums provided matches one the one we computed
     if checksum not in csums:
         logger.debug('put_image_layer: Wrong checksum')
