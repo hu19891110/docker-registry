@@ -27,7 +27,16 @@ class OSSStorage(Storage):
         return
 
     def is_exists(self, path):
-        pass
+        headers = {}
+        res = self._oss.head_object(self._config.oss_bucket, path, headers)
+        print("==========")
+        print("is_exists")
+        print(res.status)
+        print("==========")
+        if (res.status/100) == 2:
+            return True
+        else:
+            return False
 
     def get_contents_as_string(self, path):
         pass
@@ -51,9 +60,9 @@ class OSSStorage(Storage):
         print(path)
         print("==========")
         path = self._init_path(path)
-        #if not self.is_exists(path):
-        print(path)
-        raise IOError('No such key: \'{0}\''.format(path))
+        if not self.is_exists(path):
+            print(path)
+            raise IOError('No such key: \'{0}\''.format(path))
         return self.get_contents_as_string(path)
 
     def put_content(self, path, content):
