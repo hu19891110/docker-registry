@@ -134,9 +134,7 @@ def put_image_layer(image_id):
     except IOError:
         return toolkit.api_error('put_image_layer: Image not found', 404)
     layer_path = store.image_layer_path(image_id)
-    print(layer_path)
     mark_path = store.image_mark_path(image_id)
-    print(mark_path)
     if store.exists(layer_path) and not store.exists(mark_path):
         return toolkit.api_error('Image already exists', 409)
     input_stream = flask.request.stream
@@ -144,6 +142,7 @@ def put_image_layer(image_id):
         # Careful, might work only with WSGI servers supporting chunked
         # encoding (Gunicorn)
         input_stream = flask.request.environ['wsgi.input']
+    print(input_stream)
     # compute checksums
     csums = []
     sr = toolkit.SocketReader(input_stream)

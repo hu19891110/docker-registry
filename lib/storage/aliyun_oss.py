@@ -1,7 +1,7 @@
 import time
 from oss.oss_api import *
 from oss.oss_xml_handler import *
-from . import Storage, temp_store_handler
+from . import Storage
 from lib import checksums
 import StringIO
 
