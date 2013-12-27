@@ -17,6 +17,8 @@ class OSSStorage(Storage):
                            self._config.oss_access_key, 
                            self._config.oss_secret_key)
 
+        self.RecvBufferSize = 1024*1024*10
+
     def _init_path(self, path=None):
         path = os.path.join(self._root_path, path) if path else self._root_path
         logger.debug(path)
@@ -39,14 +41,19 @@ class OSSStorage(Storage):
     def get_contents_as_string(self, path):
         res = self._oss.get_object(self._config.oss_bucket, path)
         if (res.status/100) == 2:
-            return res.read()
+            fp = StringIO.StringIO()
+            data = ''
+            while True:
+                data = res.read(self.RecvBufferSize)
+                if data:
+                    fp.write(data)
+                else:
+                    break;
+            return fp.getvalue()
 
     def set_contents_from_string(self, path, string_data):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
-        # print("set_contents_from_string")
-        # print(path)
-        # print(string_data)
 
         fp = StringIO.StringIO(string_data)
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, fp)

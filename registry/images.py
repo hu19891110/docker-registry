@@ -150,6 +150,8 @@ def put_image_layer(image_id):
     tmp, store_hndlr = storage.temp_store_handler()
     sr.add_handler(store_hndlr)
     h, sum_hndlr = checksums.simple_checksum_handler(json_data)
+    print("simple_checksum_handler")
+    print(h)
     sr.add_handler(sum_hndlr)
     store.stream_write(layer_path, sr)
     csums.append('sha256:{0}'.format(h.hexdigest()))
