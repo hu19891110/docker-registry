@@ -141,6 +141,7 @@ def put_image_layer(image_id):
     if flask.request.headers.get('transfer-encoding') == 'chunked':
         # Careful, might work only with WSGI servers supporting chunked
         # encoding (Gunicorn)
+        print("chunked")
         input_stream = flask.request.environ['wsgi.input']
     print(input_stream)
     # compute checksums
