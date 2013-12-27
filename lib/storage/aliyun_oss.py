@@ -63,10 +63,10 @@ class OSSStorage(Storage):
         print(string_data)
         csums = []
         tmp, store_hndlr = temp_store_handler()
-        h, sum_hndlr = checksums.simple_checksum_handler(json_data)
+        h, sum_hndlr = checksums.simple_checksum_handler(string_data)
         csums.append('sha256:{0}'.format(h.hexdigest()))
         tmp.seek(0)
-        csums.append(checksums.compute_tarsum(tmp, json_data))
+        csums.append(checksums.compute_tarsum(tmp, string_data))
         tmp.close()
         print(csums)
 
