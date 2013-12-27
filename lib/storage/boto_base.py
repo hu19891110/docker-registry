@@ -122,6 +122,7 @@ class BotoStorage(Storage):
         return path
 
     def stream_read(self, path):
+        print("call stream_read")
         path = self._init_path(path)
         key = self._boto_bucket.lookup(path)
         if not key:

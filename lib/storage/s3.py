@@ -39,6 +39,7 @@ class S3Storage(BotoStorage):
         return path
 
     def stream_write(self, path, fp):
+        print("call stream_write")
         # Minimum size of upload part size on S3 is 5MB
         buffer_size = 5 * 1024 * 1024
         if self.buffer_size > buffer_size:
