@@ -131,8 +131,6 @@ def put_image_layer(image_id):
         print("get_content_layer")
         json_data = store.get_content(store.image_json_path(image_id))
         print(json_data)
-        print(json_data.find('\r'))
-        print(json_data.find('\n'))
     except IOError:
         return toolkit.api_error('put_image_layer: Image not found', 404)
     layer_path = store.image_layer_path(image_id)
@@ -150,8 +148,6 @@ def put_image_layer(image_id):
     tmp, store_hndlr = storage.temp_store_handler()
     sr.add_handler(store_hndlr)
     h, sum_hndlr = checksums.simple_checksum_handler(json_data)
-    print("simple_checksum_handler")
-    print(h)
     sr.add_handler(sum_hndlr)
     store.stream_write(layer_path, sr)
     csums.append('sha256:{0}'.format(h.hexdigest()))
@@ -189,9 +185,7 @@ def put_image_checksum(image_id):
     if not flask.session.get('checksum'):
         return toolkit.api_error('Checksum not found in Cookie')
     if not store.exists(store.image_json_path(image_id)):
-        print("put_image_checksum")
-        print("Image not found")
-        return toolkit.api_error('Image not found', 404)
+        return toolkit.api_error('put_image_checksum: Image not found', 404)
     mark_path = store.image_mark_path(image_id)
     if not store.exists(mark_path):
         return toolkit.api_error('Cannot set this image checksum', 409)
