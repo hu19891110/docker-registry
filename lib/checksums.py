@@ -42,8 +42,6 @@ def compute_tarsum(fp, json_data):
                     if member.isdir() and not value.endswith('/'):
                         value += '/'
                 header += '{0}{1}'.format(field, value)
-            print('header is')
-            print(header)
             h = None
             try:
                 if member.size > 0:
