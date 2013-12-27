@@ -59,6 +59,16 @@ class OSSStorage(Storage):
     def set_contents_from_string(self, path, string_data):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
+        print(string_data)
+        csums = []
+        tmp, store_hndlr = storage.temp_store_handler()
+        h, sum_hndlr = checksums.simple_checksum_handler(json_data)
+        csums.append('sha256:{0}'.format(h.hexdigest()))
+        tmp.seek(0)
+        csums.append(checksums.compute_tarsum(tmp, json_data))
+        tmp.close()
+        print(csums)
+
         fp = StringIO.StringIO(string_data)
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, fp)
         fp.close()
