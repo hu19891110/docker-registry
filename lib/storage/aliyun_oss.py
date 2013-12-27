@@ -49,6 +49,7 @@ class OSSStorage(Storage):
                     fp.write(data)
                 else:
                     break;
+            print(fp.getvalue())
             return fp.getvalue()
 
     def set_contents_from_string(self, path, string_data):
