@@ -68,6 +68,7 @@ class OSSStorage(Storage):
         tmp.seek(0)
         csums.append(checksums.compute_tarsum(tmp, string_data))
         tmp.close()
+        print("set_content_from_string")
         print(csums)
 
         fp = StringIO.StringIO(string_data)
