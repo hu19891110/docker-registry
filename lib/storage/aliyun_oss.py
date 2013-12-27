@@ -60,6 +60,7 @@ class OSSStorage(Storage):
     def set_contents_from_string(self, path, string_data):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
+        print("set_contents_from_string")
         print(string_data)
         csums = []
         tmp, store_hndlr = temp_store_handler()
