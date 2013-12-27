@@ -37,7 +37,6 @@ class OSSStorage(Storage):
         if (res.status/100) == 2:
             return True
         else:
-            logger.error(res.read())
             return False
 
     def get_contents_as_string(self, path):
