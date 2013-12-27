@@ -1,7 +1,7 @@
 import time
 from oss.oss_api import *
 from oss.oss_xml_handler import *
-from . import Storage
+from . import Storage, temp_store_handler
 
 import cache
 
@@ -61,7 +61,7 @@ class OSSStorage(Storage):
             string_data = string_data.encode("utf-8")
         print(string_data)
         csums = []
-        tmp, store_hndlr = storage.temp_store_handler()
+        tmp, store_hndlr = temp_store_handler()
         h, sum_hndlr = checksums.simple_checksum_handler(json_data)
         csums.append('sha256:{0}'.format(h.hexdigest()))
         tmp.seek(0)
