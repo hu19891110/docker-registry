@@ -47,9 +47,9 @@ class OSSStorage(Storage):
     def set_contents_from_string(self, path, string_data):
         if isinstance(string_data, unicode):
             string_data = string_data.encode("utf-8")
-        print("set_contents_from_string")
-        print(path)
-        print(string_data)
+        # print("set_contents_from_string")
+        # print(path)
+        # print(string_data)
 
         fp = StringIO.StringIO(string_data)
         res = self._oss.put_object_from_fp(self._config.oss_bucket, path, fp)
