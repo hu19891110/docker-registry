@@ -33,6 +33,7 @@ def compute_tarsum(fp, json_data):
     try:
         tar = tarfile.open(mode='r|*', fileobj=fp)
         for member in tar:
+            print(member)
             header = ''
             for field in header_fields:
                 value = getattr(member, field)
@@ -42,6 +43,7 @@ def compute_tarsum(fp, json_data):
                     if member.isdir() and not value.endswith('/'):
                         value += '/'
                 header += '{0}{1}'.format(field, value)
+            print(header)
             h = None
             try:
                 if member.size > 0:
