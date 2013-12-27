@@ -43,7 +43,8 @@ def compute_tarsum(fp, json_data):
                     if member.isdir() and not value.endswith('/'):
                         value += '/'
                 header += '{0}{1}'.format(field, value)
-            print('header is', header)
+            print('header is')
+            print(header)
             h = None
             try:
                 if member.size > 0:
@@ -55,7 +56,8 @@ def compute_tarsum(fp, json_data):
                 h = sha256_string(header)
             hashes.append(h)
         hashes.sort()
-        print('hashes is ', hashes)
+        print('hashes is ')
+        print(hashes)
     except tarfile.ReadError as e:
         if e.message != 'empty file':
             # NOTE(samalba): ignore empty tarfiles but still let the tarsum
