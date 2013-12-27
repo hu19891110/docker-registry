@@ -30,10 +30,7 @@ class OSSStorage(Storage):
     def exists(self, path, external=True):
         if external:
             path = self._init_path(path)
-        headers = {}
-        
-        res = self._oss.head_object(self._config.oss_bucket, path, headers)
-        
+        res = self._oss.head_object(self._config.oss_bucket, path)
         if (res.status/100) == 2:
             return True
         else:
