@@ -131,10 +131,10 @@ def put_image_layer(image_id):
         print("get_content_layer")
         json_data = store.get_content(store.image_json_path(image_id))
         print(json_data)
+        print(json_data.find('\r'))
+        print(json_data.find('\n'))
     except IOError:
-        print("put_image_layer")
-        print("Image not found")
-        return toolkit.api_error('Image not found', 404)
+        return toolkit.api_error('put_image_layer: Image not found', 404)
     layer_path = store.image_layer_path(image_id)
     mark_path = store.image_mark_path(image_id)
     if store.exists(layer_path) and not store.exists(mark_path):
