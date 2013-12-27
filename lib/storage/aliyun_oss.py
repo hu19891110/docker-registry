@@ -3,6 +3,7 @@ from oss.oss_api import *
 from oss.oss_xml_handler import *
 from . import Storage, temp_store_handler
 from lib import checksums
+import StringIO
 
 import cache
 
