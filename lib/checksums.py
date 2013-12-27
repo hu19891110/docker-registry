@@ -32,8 +32,9 @@ def compute_tarsum(fp, json_data):
     hashes = []
     try:
         tar = tarfile.open(mode='r|*', fileobj=fp)
+        print("get tar")
+        print(len(tar))
         for member in tar:
-            print(member)
             header = ''
             for field in header_fields:
                 value = getattr(member, field)
@@ -56,8 +57,6 @@ def compute_tarsum(fp, json_data):
                 h = sha256_string(header)
             hashes.append(h)
         hashes.sort()
-        print('hashes is ')
-        print(hashes)
     except tarfile.ReadError as e:
         if e.message != 'empty file':
             # NOTE(samalba): ignore empty tarfiles but still let the tarsum
@@ -67,7 +66,7 @@ def compute_tarsum(fp, json_data):
         if tar:
             tar.close()
     print('concated hashes')
-    print(hashes)
+    print(len(hashes))
     data = json_data + ''.join(hashes)
     tarsum = 'tarsum+sha256:{0}'.format(sha256_string(data))
     print('checksums.compute_tarsum: return {0}'.format(tarsum))
