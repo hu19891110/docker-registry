@@ -144,8 +144,8 @@ class BotoStorage(Storage):
         if self._root_path != '/':
             ln = len(self._root_path)
         exists = False
-        print(self._boto_bucket.list(prefix=path, delimiter='/'))
         for key in self._boto_bucket.list(prefix=path, delimiter='/'):
+            print(key)
             exists = True
             name = key.name
             if name.endswith('/'):

@@ -125,7 +125,12 @@ class OSSStorage(Storage):
 
     def list_directory(self, path=None):
         path = self._init_path(path)
-        
+        if not path.endswith('/'):
+            path += '/'
+        ln = 0
+        if self._root_path != '/':
+            ln = len(self._root_path)
+        exists = False
 
     #@cache.remove
     def remove(self, path):
