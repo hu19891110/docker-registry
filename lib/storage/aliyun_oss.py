@@ -27,9 +27,6 @@ class OSSStorage(Storage):
             return path[1:]
         return path
 
-    def makeKey(self, path):
-        return
-
     def exists(self, path, external=True):
         if external:
             path = self._init_path(path)
@@ -79,7 +76,6 @@ class OSSStorage(Storage):
         logger.debug("stream_read")
 
     def stream_write(self, path, fp):
-        print("stream_write")
         buffer_size = 5 * 1024 * 1024
         if self.buffer_size > buffer_size:
             buffer_size = self.buffer_size
@@ -123,9 +119,9 @@ class OSSStorage(Storage):
                                                 upload_id,
                                                 part_msg_xml)
                 if res.status == 200:
-                    print("Upload successful")
+                    logger.debug("Upload successful")
                 else:
-                    print("Upload failed")
+                    logger.debug("Upload failed")
 
     def list_directory(self, path=None):
         logger.debug("list_directory")
@@ -133,7 +129,7 @@ class OSSStorage(Storage):
     #@cache.remove
     def remove(self, path):
         logger.debug("remove")
-
+        print(path)
 
     def get_size(self, path):
         logger.debug("get_size")
