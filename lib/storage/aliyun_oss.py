@@ -112,7 +112,7 @@ class OSSStorage(Storage):
                             io.close()
                         else:
                             break;
-                    except: IOError:
+                    except IOError:
                         break
                 part_msg_xml = get_part_xml(self._oss,
                                             self._config.oss_bucket, 
