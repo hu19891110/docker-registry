@@ -76,7 +76,7 @@ class OSSStorage(Storage):
         print("stream_read")
         path = self._init_path(path)
         print(path)
-        if self.exists(path):
+        if self.exists(path, False):
             print("exists")
             res = self._oss.get_object(self._config.oss_bucket, path)
             if res.status == 200:
