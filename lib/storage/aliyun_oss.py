@@ -138,7 +138,16 @@ class OSSStorage(Storage):
             body = res.read()
             h = GetBucketXml(body)
             (file_list, common_list) = h.list()
-            
+            for c in common_list:
+                print(c)
+                
+            for key_name in file_list:
+                print(key_name)
+                if key_name.endswith('/'):
+                    yield name[ln:-1]
+                else:
+                    yield name[ln:]
+
 
     #@cache.remove
     def remove(self, path):
