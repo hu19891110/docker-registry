@@ -61,8 +61,6 @@ def compute_tarsum(fp, json_data):
     finally:
         if tar:
             tar.close()
-    print('concated hashes')
-    print(len(hashes))
     data = json_data + ''.join(hashes)
     tarsum = 'tarsum+sha256:{0}'.format(sha256_string(data))
     print('checksums.compute_tarsum: return {0}'.format(tarsum))

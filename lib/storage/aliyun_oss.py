@@ -124,7 +124,8 @@ class OSSStorage(Storage):
                     logger.debug("Upload failed")
 
     def list_directory(self, path=None):
-        logger.debug("list_directory")
+        path = self._init_path(path)
+        
 
     #@cache.remove
     def remove(self, path):
