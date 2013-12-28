@@ -133,14 +133,14 @@ class OSSStorage(Storage):
         exists = False
 
         delimiter = "/"
-        res = self._oss.get_bucket(bucket, delimiter=delimiter)
+        res = self._oss.get_bucket(self._config.oss_bucket, delimiter=delimiter)
         if res.status == 200:
             body = res.read()
             h = GetBucketXml(body)
             (file_list, common_list) = h.list()
             for c in common_list:
                 print(c)
-                
+
             for key_name in file_list:
                 print(key_name)
                 if key_name.endswith('/'):
