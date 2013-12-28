@@ -63,6 +63,7 @@ def get_tags(namespace, repository):
             if not tag_name.startswith('tag_'):
                 continue
             data[tag_name[4:]] = store.get_content(fname)
+        print(data)
     except OSError:
         return toolkit.api_error('Repository not found', 404)
     return toolkit.response(data)
