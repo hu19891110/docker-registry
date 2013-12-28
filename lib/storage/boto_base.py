@@ -148,6 +148,7 @@ class BotoStorage(Storage):
             print(key)
             exists = True
             name = key.name
+            print(name)
             if name.endswith('/'):
                 yield name[ln:-1]
             else:
