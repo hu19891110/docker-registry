@@ -104,7 +104,7 @@ class OSSStorage(Storage):
                             params['partNumber'] = str(num_part)
                             params['uploadId'] = upload_id
                             io = StringIO.StringIO(buf)
-                            self._oss.put_object_from_fp(bucker=self._config.oss_bucket,
+                            self._oss.put_object_from_fp(bucket=self._config.oss_bucket,
                                                          object=path,
                                                          fp=io,
                                                          params=params)
