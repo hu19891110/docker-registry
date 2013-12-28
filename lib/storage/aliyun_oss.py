@@ -75,7 +75,9 @@ class OSSStorage(Storage):
     def stream_read(self, path):
         print("stream_read")
         path = self._init_path(path)
+        print(path)
         if self.exists(path):
+            print("exists")
             res = self._oss.get_object(self._config.oss_bucket, path)
             if res.status == 200:
                 while True:
@@ -84,6 +86,7 @@ class OSSStorage(Storage):
                         break;
                     yield buf
         else:
+            print("not exists")
             raise IOError('No such key: \'{0}\''.format(path))
 
     def stream_write(self, path, fp):
