@@ -137,6 +137,7 @@ class OSSStorage(Storage):
         res = self._oss.get_bucket(self._config.oss_bucket)
         if res.status == 200:
             body = res.read()
+            print(body)
             h = GetBucketXml(body)
             (file_list, common_list) = h.list()
             for c in common_list:
