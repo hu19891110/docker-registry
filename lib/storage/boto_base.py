@@ -153,6 +153,8 @@ class BotoStorage(Storage):
                 yield name[ln:-1]
             else:
                 yield name[ln:]
+            print("get final name")
+            print(name)
         if exists is False:
             # In order to be compliant with the LocalStorage API. Even though
             # GS does not have a concept of folders.

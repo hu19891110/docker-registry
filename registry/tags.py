@@ -59,6 +59,8 @@ def get_tags(namespace, repository):
     try:
         for fname in store.list_directory(store.tag_path(namespace,
                                                          repository)):
+            print("fname")
+            print(fname)
             tag_name = fname.split('/').pop()
             if not tag_name.startswith('tag_'):
                 continue
