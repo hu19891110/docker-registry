@@ -140,15 +140,13 @@ class OSSStorage(Storage):
             print(body)
             h = GetBucketXml(body)
             (file_list, common_list) = h.list()
-            # for c in common_list:
-            #     print(c)
 
-            for key_name in file_list:
-                print(key_name)
-                # if key_name.endswith('/'):
-                #     yield key_name[ln:-1]
-                # else:
-                #     yield key_name[ln:]
+            for key in file_list:
+                key_name = key[0]
+                if key_name.endswith('/'):
+                    yield key_name[ln:-1]
+                else:
+                    yield key_name[ln:]
 
 
     #@cache.remove
