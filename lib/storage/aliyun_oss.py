@@ -79,11 +79,12 @@ class OSSStorage(Storage):
         if self.exists(path, False):
             print("exists")
             res = self._oss.get_object(self._config.oss_bucket, path)
+            print(res.status)
             if res.status == 200:
                 while True:
                     buf = res.read(self.buffer_size)
                     if not buf:
-                        break;
+                        break
                     yield buf
         else:
             print("not exists")
