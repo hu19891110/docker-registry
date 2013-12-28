@@ -140,8 +140,8 @@ class OSSStorage(Storage):
             print(body)
             h = GetBucketXml(body)
             (file_list, common_list) = h.list()
-            for c in common_list:
-                print(c)
+            # for c in common_list:
+            #     print(c)
 
             for key_name in file_list:
                 print(key_name)
