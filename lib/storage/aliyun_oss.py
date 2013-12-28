@@ -132,6 +132,14 @@ class OSSStorage(Storage):
             ln = len(self._root_path)
         exists = False
 
+        delimiter = "/"
+        res = self._oss.get_bucket(bucket, delimiter=delimiter)
+        if res.status == 200:
+            body = res.read()
+            h = GetBucketXml(body)
+            (file_list, common_list) = h.list()
+            
+
     #@cache.remove
     def remove(self, path):
         logger.debug("remove")

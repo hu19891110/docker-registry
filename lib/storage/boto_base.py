@@ -145,16 +145,14 @@ class BotoStorage(Storage):
             ln = len(self._root_path)
         exists = False
         for key in self._boto_bucket.list(prefix=path, delimiter='/'):
-            print(key)
             exists = True
             name = key.name
+            print("key name is")
             print(name)
             if name.endswith('/'):
                 yield name[ln:-1]
             else:
                 yield name[ln:]
-            print("get final name")
-            print(name)
         if exists is False:
             # In order to be compliant with the LocalStorage API. Even though
             # GS does not have a concept of folders.
