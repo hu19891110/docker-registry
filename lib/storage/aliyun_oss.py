@@ -86,7 +86,7 @@ class OSSStorage(Storage):
         path = self._init_path(path)
 
         #Init multipart upload
-        res = self._oss.init_multi_puload(self._config.oss_bucket, path)
+        res = self._oss.init_multi_upload(self._config.oss_bucket, path)
         if res.status == 200:
             body = res.read()
             h = GetInitUploadIdXml(body)
