@@ -133,7 +133,8 @@ class OSSStorage(Storage):
         exists = False
 
         delimiter = "/"
-        res = self._oss.get_bucket(self._config.oss_bucket, delimiter=delimiter)
+        print(self._config.oss_bucket)
+        res = self._oss.get_bucket(self._config.oss_bucket)
         if res.status == 200:
             body = res.read()
             h = GetBucketXml(body)
