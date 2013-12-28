@@ -3,7 +3,7 @@ from oss.oss_api import *
 from oss.oss_xml_handler import *
 from . import Storage
 from lib import checksums
-import StringIO
+import cStringIO as StringIO
 
 import cache
 
@@ -79,7 +79,53 @@ class OSSStorage(Storage):
         logger.debug("stream_read")
 
     def stream_write(self, path, fp):
-        logger.debug("stream_write")
+        print("stream_write")
+        buffer_size = 5 * 1024 * 1024
+        if self.buffer_size > buffer_size
+            buffer_size = self.buffer_size
+        path = self._init_path(path)
+
+        #Init multipart upload
+        res = self._oss.init_multi_puload(self._config.oss_bucket, path)
+        if res.status == 200:
+            body = res.read()
+            h = GetInitUploadIdXml(body)
+            upload_id = h.upload_id
+
+            if len(upload_id) == 0:
+                logger.error("Init upload failed!")
+            else:
+                num_part = 1
+                while True:
+                    try:
+                        buf = fp.read(buffer_size)
+                        if buf:
+                            params = {}
+                            params['partNumber'] = str(num_part)
+                            params['uploadId'] = upload_id
+                            io = StringIO.StringIO(buf)
+                            self._oss.put_object_from_fp(bucker=self._config.oss_bucket
+                                                         object=path,
+                                                         fp=io,
+                                                         params=params)
+                            num_part += 1
+                            io.close()
+                        else:
+                            break;
+                    except: IOError:
+                        break
+                part_msg_xml = get_part_xml(self._oss,
+                                            self._config.oss_bucket, 
+                                            path,
+                                            upload_id)
+                res = self._oss.complete_upload(self._config.oss_bucket,
+                                                path,
+                                                upload_id,
+                                                part_msg_xml)
+                if res.status == 200:
+                    print("Upload successful")
+                else:
+                    print("Upload failed")
 
     def list_directory(self, path=None):
         logger.debug("list_directory")
@@ -87,6 +133,7 @@ class OSSStorage(Storage):
     #@cache.remove
     def remove(self, path):
         logger.debug("remove")
+        
 
     def get_size(self, path):
         logger.debug("get_size")
