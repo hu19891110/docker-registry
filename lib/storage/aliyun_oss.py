@@ -81,7 +81,7 @@ class OSSStorage(Storage):
     def stream_write(self, path, fp):
         print("stream_write")
         buffer_size = 5 * 1024 * 1024
-        if self.buffer_size > buffer_size
+        if self.buffer_size > buffer_size:
             buffer_size = self.buffer_size
         path = self._init_path(path)
 
@@ -133,7 +133,7 @@ class OSSStorage(Storage):
     #@cache.remove
     def remove(self, path):
         logger.debug("remove")
-        
+
 
     def get_size(self, path):
         logger.debug("get_size")
