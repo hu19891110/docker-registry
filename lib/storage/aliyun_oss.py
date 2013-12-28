@@ -134,7 +134,7 @@ class OSSStorage(Storage):
 
         delimiter = "/"
         print(self._config.oss_bucket)
-        res = self._oss.get_bucket(self._config.oss_bucket)
+        res = self._oss.get_bucket(self._config.oss_bucket, path)
         if res.status == 200:
             body = res.read()
             print(body)
