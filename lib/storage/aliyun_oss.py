@@ -83,6 +83,7 @@ class OSSStorage(Storage):
             if res.status == 200:
                 while True:
                     buf = res.read(self.buffer_size)
+                    print(len(buf))
                     if not buf:
                         break
                     yield buf
