@@ -27,8 +27,8 @@ class OSSStorage(Storage):
             return path[1:]
         return path
 
-    def exists(self, path, external=True):
-        if external:
+    def exists(self, path, pack=True):
+        if pack:
             path = self._init_path(path)
         res = self._oss.head_object(self._config.oss_bucket, path)
         if (res.status/100) == 2:
@@ -129,7 +129,10 @@ class OSSStorage(Storage):
     #@cache.remove
     def remove(self, path):
         logger.debug("remove")
-        print(path)
+        path = self._init_path(path)
+        if self.exists(path, False):
+            print(path)
+            self._oss.delete_object(self._config.oss_bucket, path)
 
     def get_size(self, path):
         logger.debug("get_size")
