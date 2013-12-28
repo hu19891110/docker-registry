@@ -145,10 +145,10 @@ class OSSStorage(Storage):
 
             for key_name in file_list:
                 print(key_name)
-                if key_name.endswith('/'):
-                    yield key_name[ln:-1]
-                else:
-                    yield key_name[ln:]
+                # if key_name.endswith('/'):
+                #     yield key_name[ln:-1]
+                # else:
+                #     yield key_name[ln:]
 
 
     #@cache.remove
