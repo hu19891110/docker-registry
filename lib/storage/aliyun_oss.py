@@ -31,14 +31,14 @@ class OSSStorage(Storage):
         if pack:
             path = self._init_path(path)
         res = self._oss.head_object(self._config.oss_bucket, path)
-        if (res.status/100) == 2:
+        if res.status == 200:
             return True
         else:
             return False
 
     def get_contents_as_string(self, path):
         res = self._oss.get_object(self._config.oss_bucket, path)
-        if (res.status/100) == 2:
+        if res.status == 200:
             fp = StringIO.StringIO()
             data = ''
             while True:
@@ -73,7 +73,18 @@ class OSSStorage(Storage):
         self.set_contents_from_string(path, content)
 
     def stream_read(self, path):
-        logger.debug("stream_read")
+        print("stream_read")
+        path = self._init_path(path)
+        if self.exists(path):
+            res = self._oss.get_object(self._config.oss_bucket, path)
+            if res.status == 200:
+                while True:
+                    buf = res.read(self.buffer_size)
+                    if not buf:
+                        break;
+                    yield buf
+        else:
+            raise IOError('No such key: \'{0}\''.format(path))
 
     def stream_write(self, path, fp):
         buffer_size = 5 * 1024 * 1024
@@ -140,7 +151,6 @@ class OSSStorage(Storage):
             print(body)
             h = GetBucketXml(body)
             (file_list, common_list) = h.list()
-
             for key in file_list:
                 key_name = key[0]
                 if key_name.endswith('/'):
