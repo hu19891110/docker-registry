@@ -73,17 +73,12 @@ class OSSStorage(Storage):
         self.set_contents_from_string(path, content)
 
     def stream_read(self, path):
-        print("stream_read")
         path = self._init_path(path)
-        print(path)
         if self.exists(path, False):
-            print("exists")
             res = self._oss.get_object(self._config.oss_bucket, path)
-            print(res.status)
             if res.status == 200:
                 while True:
                     buf = res.read(self.buffer_size)
-                    print(len(buf))
                     if not buf:
                         break
                     yield buf

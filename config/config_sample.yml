@@ -2,7 +2,7 @@
 # other flavors)
 common:
     # Bucket for storage
-    boto_bucket: guizefang
+    boto_bucket: REPLACEME
 
     # Amazon S3 Storage Configuration
     s3_access_key: REPLACEME
@@ -19,10 +19,10 @@ common:
     gs_secret_key: REPLACEME
     gs_secure: REPLACEME
 
-    oss_host: oss.aliyuncs.com
-    oss_access_key: X8XGPDz5DFx1YB3r
-    oss_secret_key: UzAU4P1s1ptLYuPvLlRSNbpwndfbBB
-    oss_bucket: lillian
+    oss_host: REPLACEME
+    oss_access_key: REPLACEME
+    oss_secret_key: REPLACEME
+    oss_bucket: REPLACEME
 
     # Set a random string here
     secret_key: REPLACEME
@@ -63,6 +63,12 @@ oss:
         host: "_env:CACHE_REDIS_HOST:localhost"
         port: "_env:CACHE_REDIS_PORT:6379"
         password: "_env:CACHE_REDIS_PASSWORD:None"
+    email_exceptions:
+        smtp_host: REPLACEME
+        smtp_login: REPLACEME
+        smtp_password: REPLACEME
+        from_addr: docker-registry@localdomain.local
+        to_addr: noise+dockerregistry@localdomain.local
 
 # This flavor is automatically used by unit tests
 test:
